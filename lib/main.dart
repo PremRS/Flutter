@@ -5,6 +5,8 @@ import 'package:my_app/layout_structure.dart';
 import 'counter.dart';
 import 'layout2.dart';
 import 'list.dart';
+import 'simulatorScreen1.dart';
+import 'simulatorScreen2.dart';
 
 void main() => (runApp(MyApp()));
 
@@ -22,7 +24,9 @@ class MyApp extends StatelessWidget {
         '/list': (context) => MyList(),
         '/counter': (context) => MyCounter(),
         '/layoutStructure': (context) => MyLayoutStructure(),
-        '/layout': (context) => MyLayout()
+        '/layout': (context) => MyLayout(),
+        '/screen1': (context) => MyScreenOne(),
+        '/screen2': (context) => MyScreenTwo()
       },
     );
   }
@@ -38,52 +42,61 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   final flutterImage = Image.asset(
     'assets/flutter.png',
     fit: BoxFit.cover,
   );
 
-  _buildGridTiles(String path, String label, String route) => GestureDetector(
-        child: Container(
-            child: Column(
-          children: <Widget>[
-            Image.asset(path),
-            Container(
-                color: Colors.grey[100],
-                padding: EdgeInsets.all(6),
-                child: Row(children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      label,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Open Sans',
-                      ),
+  
+
+  _buildGridTiles(String path, String label, String route) {
+
+    return GestureDetector(
+      child: Container(
+          child: Column(
+        children: <Widget>[
+          Image.asset(path),
+          Container(
+              color: Colors.grey[100],
+              padding: EdgeInsets.symmetric(horizontal:10,vertical: 10),
+              child: Row(children: <Widget>[
+                Expanded(
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Open Sans',
                     ),
                   ),
-                  Icon(
-                    Icons.thumb_up,
-                    color: Theme.of(context).primaryColor,
-                    size: 18,
-                  )
-                ])),
-          ],
-        )),
-        onTap: () {
-          Navigator.pushNamed(context, route);
-        },
-      );
+                ),
+               
+                Icon(
+                  Icons.favorite_border,
+                  color: Theme.of(context).primaryColor,
+                ),
+                
+                
+              ])),
+        ],
+      )),
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
+    );
+  }
 
   Widget _buildGrid() => GridView.extent(
-          maxCrossAxisExtent: 250,
-          padding: const EdgeInsets.all(4),
+          maxCrossAxisExtent: 350,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           children: [
             _buildGridTiles('assets/list.jpg', 'LIST', '/list'),
             _buildGridTiles('assets/counter.png', 'COUNTER', '/counter'),
             _buildGridTiles('assets/layout.jpg', 'STRUCTURE', '/layoutStructure'),
-            _buildGridTiles('assets/lake.jpg', 'LAYOUT', '/layout')
+            _buildGridTiles('assets/lake.jpg', 'LAYOUT', '/layout'),
+            _buildGridTiles('assets/screen.png', 'SCREEN-1', '/screen1'),
+            _buildGridTiles('assets/screen.png', 'SCREEN-2', '/screen2')
           ]);
 
   @override
@@ -98,9 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
             children: <Widget>[
               Container(
-                child: Expanded(
-                  child: flutterImage,
-                ),
+                width: 350,
+                height: 150,
+                child: flutterImage,
               ),
               Expanded(
                 child: Container(

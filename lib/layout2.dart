@@ -11,6 +11,47 @@ class MyLayout extends StatelessWidget {
   }
 }
 
+class FavouriteStar extends StatefulWidget{
+
+  @override
+  _FavouriteStarState createState() => _FavouriteStarState();
+}
+
+class _FavouriteStarState extends State<FavouriteStar>{
+
+  bool _starSelected = true;
+  int _count = 41;
+  
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          icon: ( _starSelected ? Icon(Icons.star) : Icon(Icons.star_border) ),
+          color: Colors.red[500],
+          splashColor: Colors.red[500],
+          onPressed: toggleStarStatus
+        ),
+        Text('$_count'),
+      ],);
+  }
+
+  void toggleStarStatus(){
+      setState(() {
+        
+        if(_starSelected){
+            _count--;
+            _starSelected = false;
+        }
+        else {
+          _count++;
+          _starSelected = true;
+        }
+      });
+  }
+}
+
 Widget myNewLayout(BuildContext context) {
  
  Color color = Theme.of(context).primaryColor;
@@ -42,8 +83,7 @@ Widget myNewLayout(BuildContext context) {
                   ),
                 )
               ])),
-          Icon(Icons.star, color: Colors.red[500]),
-          Text('41')
+          FavouriteStar()
         ],
       ));
 
@@ -82,6 +122,7 @@ final informationIcons = Container(
       ],
     ),
   );
+
   final textSection = Container(
     padding: EdgeInsets.all(32),
     child: Text(
@@ -94,6 +135,7 @@ final informationIcons = Container(
       softWrap: true,
     ),
   );
+
   return Container(
       child: ListView(
     children: [
