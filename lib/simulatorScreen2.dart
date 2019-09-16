@@ -24,45 +24,44 @@ class MyScreenTwo extends StatelessWidget {
         Expanded(
           child:ListView.builder(
           itemCount: 4,
-          itemBuilder: (context,i){
+          itemBuilder: (context,i) {
             return new BlogBody();
           },
         )
         )
      
-        
-
       ]),
     ));
   }
 }
 
 Widget appBar(BuildContext context) => Container(
-      padding: const EdgeInsets.fromLTRB(8,24,8,0),
+      padding: const EdgeInsets.fromLTRB(4,24,4,0),
       child: Row(
         children: [
-          Icon(
-            Icons.menu,
-            color: Colors.white,
+          IconButton(
+            icon:Icon(Icons.navigate_before,
+            color: Colors.white,),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
           Expanded(
             child: Text(
               'Blog Articles',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
               ),
             ),
           ),
-          IconButton(
-            onPressed: null,
-            icon: Icon(
+          Icon(
               Icons.search,
               color: Colors.white,
             ),
-          ),
+          
           Icon(
             Icons.more_vert,
             color: Colors.white,
@@ -72,7 +71,7 @@ Widget appBar(BuildContext context) => Container(
     );
 
 Widget picture() => Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.all(16),
       child: Card(
           elevation: 24,
           shape: RoundedRectangleBorder(
@@ -91,9 +90,10 @@ Widget picture() => Container(
     );
 
 Widget pictureTitle() => Row(
+  // mainAxisSize: MainAxisSize.min,
+  
       children: [
-        Expanded(
-            child: Container(
+        Container(
                 padding: EdgeInsets.fromLTRB(16, 12, 16, 0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -102,16 +102,16 @@ Widget pictureTitle() => Row(
                 child: Text(
                   'Swiss Lake Ground',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 22,
                     color: Color.fromRGBO(233, 50, 90, 1),
                     fontWeight: FontWeight.w600,
                   ),
-                )))
+                ))
       ],
     );
 
 Widget authorAndDate() => Container(
-    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -121,6 +121,7 @@ Widget authorAndDate() => Container(
               'Prem Rajasekaran',
               style: TextStyle(
                 color: Colors.grey,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ],
@@ -130,6 +131,8 @@ Widget authorAndDate() => Container(
             'Jul 20',
             style: TextStyle(
               color: Colors.grey,
+              fontWeight: FontWeight.w500,
+
             ),
           )
         ]),
@@ -139,7 +142,7 @@ Widget authorAndDate() => Container(
 Widget selectionButtons() => Row(
       children: [
         Expanded(
-          child: Container(
+         child:Container(
               padding: EdgeInsets.fromLTRB(20, 16, 12, 16),
               decoration: BoxDecoration(
                   color: Colors.grey[200],
@@ -182,8 +185,8 @@ Widget selectionButtons() => Row(
                         color: Colors.grey,
                       ),
                     ),
-                  ])),
-        )
+                  ]),
+        ))
       ],
     );
 
@@ -195,16 +198,17 @@ class BlogBody extends StatefulWidget {
 class _BlogBodyState extends State<BlogBody> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12),
-      child: Stack(children: [
+    return 
+    
+      Stack(children: [
       picture(),
-      Positioned(
-          top: 143,
-          child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              width: 387,
-              height: 140,
+      Positioned.fill(
+          top: 180,
+         child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              // width: 387,
+              // margin: EdgeInsets.only(top:170),
+              // height: 140,
               child: Card(
                   elevation: 24,
                   shape: RoundedRectangleBorder(
@@ -212,12 +216,13 @@ class _BlogBodyState extends State<BlogBody> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // Text('hi JJK')
                       pictureTitle(),
                       authorAndDate(),
                       selectionButtons()
                     ],
-                  )))),
-    ]),
+                  ))),
+      )]
     );
     
   }
