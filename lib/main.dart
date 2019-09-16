@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:my_app/layout_structure.dart';
+import './layout_structure.dart';
 
-import 'counter.dart';
-import 'layout2.dart';
-import 'list.dart';
-import 'simulatorScreen1.dart';
-import 'simulatorScreen2.dart';
+import './counter.dart';
+import './layout2.dart';
+import './list.dart';
+import './simulatorScreen1.dart';
+import './simulatorScreen2.dart';
 
 void main() => (runApp(MyApp()));
 
@@ -42,24 +42,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final flutterImage = Image.asset(
     'assets/flutter.png',
     fit: BoxFit.cover,
   );
 
-  
+  bool likeStatus;
+
+  final Set<String> likeSet = Set<String>();
 
   _buildGridTiles(String path, String label, String route) {
-
-    return GestureDetector(
-      child: Container(
-          child: Column(
+    likeStatus = likeSet.contains(label);
+    return Container(
+      child: Column(
         children: <Widget>[
-          Image.asset(path),
+          GestureDetector(
+            child: Image.asset(path),
+            onTap: () {
+              Navigator.pushNamed(context, route);
+            },
+          ),
           Container(
               color: Colors.grey[100],
-              padding: EdgeInsets.symmetric(horizontal:10,vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(children: <Widget>[
                 Expanded(
                   child: Text(
@@ -70,19 +75,26 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-               
-                Icon(
-                  Icons.favorite_border,
-                  color: Theme.of(context).primaryColor,
+                GestureDetector(
+                  child: Icon(
+                    (likeStatus ? Icons.favorite : Icons.favorite_border),
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  onTap: () {
+                    setState(() {
+                      if (likeSet.contains(label)) {
+                        likeStatus = false;
+                        likeSet.remove(label);
+                      } else {
+                        likeStatus = true;
+                        likeSet.add(label);
+                      }
+                    });
+                  },
                 ),
-                
-                
               ])),
         ],
-      )),
-      onTap: () {
-        Navigator.pushNamed(context, route);
-      },
+      ),
     );
   }
 
@@ -93,7 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             _buildGridTiles('assets/list.jpg', 'LIST', '/list'),
             _buildGridTiles('assets/counter.png', 'COUNTER', '/counter'),
-            _buildGridTiles('assets/layout.jpg', 'STRUCTURE', '/layoutStructure'),
+            _buildGridTiles(
+                'assets/layout.jpg', 'STRUCTURE', '/layoutStructure'),
             _buildGridTiles('assets/lake.jpg', 'LAYOUT', '/layout'),
             _buildGridTiles('assets/screen.png', 'SCREEN-1', '/screen1'),
             _buildGridTiles('assets/screen.png', 'SCREEN-2', '/screen2')
