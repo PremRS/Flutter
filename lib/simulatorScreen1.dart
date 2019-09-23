@@ -83,7 +83,7 @@ class _MyBodyState extends State<MyBody> {
 
   productDescription() => Container(
       // decoration:BoxDecoration(border: Border.all(color: Colors.black)),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

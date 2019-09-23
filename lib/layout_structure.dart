@@ -114,7 +114,7 @@ static final layoutTitle = Text(
     decoration: BoxDecoration(
         border: Border.all(color: Colors.red)
          ),
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(12.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

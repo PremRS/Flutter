@@ -1,5 +1,10 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:my_app/GraphQLApp.dart';
+import 'package:my_app/GraphQLIndex.dart';
+import 'package:my_app/GraphQLUpload.dart';
+import 'package:my_app/SplashScreen.dart';
 import './layout_structure.dart';
 
 import './counter.dart';
@@ -7,10 +12,18 @@ import './layout2.dart';
 import './list.dart';
 import './simulatorScreen1.dart';
 import './simulatorScreen2.dart';
+import 'bloc_delegate/SimpleBlocDelegate.dart';
 
-void main() => (runApp(MyApp()));
+
+
+void main() {
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+  runApp(MyApp());
+}
+  
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,6 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
+      
       initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(title: 'Flutter Tutorial '),
@@ -26,7 +40,11 @@ class MyApp extends StatelessWidget {
         '/layoutStructure': (context) => MyLayoutStructure(),
         '/layout': (context) => MyLayout(),
         '/screen1': (context) => MyScreenOne(),
-        '/screen2': (context) => MyScreenTwo()
+        '/screen2': (context) => MyScreenTwo(),
+        '/screen': (context) => SplashScreen(),
+        '/gql': (context) => GraphQLIndex(),
+        '/gqlApp': (context) => GraphQLApp(),
+        '/gqlUpload': (context) => GraphQLUpload()
       },
     );
   }
@@ -56,15 +74,18 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       child: Column(
         children: <Widget>[
-          GestureDetector(
-            child: Image.asset(path),
+          Expanded(
+          child:GestureDetector(
+            child: Image.asset(path,
+            fit: BoxFit.cover,),
             onTap: () {
               Navigator.pushNamed(context, route);
             },
-          ),
+          )
+        ),
           Container(
-              color: Colors.grey[100],
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              color: Colors.grey[200],
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(children: <Widget>[
                 Expanded(
                   child: Text(
@@ -99,17 +120,20 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _buildGrid() => GridView.extent(
-          maxCrossAxisExtent: 350,
+          maxCrossAxisExtent: 300,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
           children: [
+            
             _buildGridTiles('assets/list.jpg', 'LIST', '/list'),
             _buildGridTiles('assets/counter.png', 'COUNTER', '/counter'),
-            _buildGridTiles(
-                'assets/layout.jpg', 'STRUCTURE', '/layoutStructure'),
+            _buildGridTiles('assets/layout.jpg', 'STRUCTURE', '/layoutStructure'),
             _buildGridTiles('assets/lake.jpg', 'LAYOUT', '/layout'),
             _buildGridTiles('assets/screen.png', 'SCREEN-1', '/screen1'),
-            _buildGridTiles('assets/screen.png', 'SCREEN-2', '/screen2')
+            _buildGridTiles('assets/screen.png', 'SCREEN-2', '/screen2'),
+            _buildGridTiles('assets/login.png', 'LOGIN SCREEN', '/screen'),
+            _buildGridTiles('assets/graphql.png', 'GRAPHQL', '/gql'),
+
           ]);
 
   @override

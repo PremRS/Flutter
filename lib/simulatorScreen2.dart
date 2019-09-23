@@ -15,7 +15,7 @@ class MyScreenTwo extends StatelessWidget {
              
             ],
             begin: Alignment.topLeft,
-            end: Alignment.topRight,
+            end: Alignment.bottomRight,
             stops: [0.1, 0.3, 0.5, 0.8]),
       ),
       child: Column(children: [
@@ -51,8 +51,8 @@ Widget appBar(BuildContext context) => Container(
               'Blog Articles',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
             ),
@@ -203,7 +203,7 @@ class _BlogBodyState extends State<BlogBody> {
       Stack(children: [
       picture(),
       Positioned.fill(
-          top: 180,
+          top: 150,
          child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               // width: 387,
