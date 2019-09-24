@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:my_app/GraphQLApp.dart';
+import 'package:my_app/GraphQLFile.dart';
 import 'package:my_app/GraphQLIndex.dart';
 import 'package:my_app/GraphQLUpload.dart';
 import 'package:my_app/SplashScreen.dart';
@@ -44,7 +45,8 @@ class MyApp extends StatelessWidget {
         '/screen': (context) => SplashScreen(),
         '/gql': (context) => GraphQLIndex(),
         '/gqlApp': (context) => GraphQLApp(),
-        '/gqlUpload': (context) => GraphQLUpload()
+        '/gqlUpload': (context) => GraphQLUpload(),
+        '/gqlFile': (context) => GraphQLFile()
       },
     );
   }

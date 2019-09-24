@@ -30,7 +30,7 @@ class GraphQLUpload extends StatelessWidget {
       child: Material(
         child: Scaffold(
           appBar: AppBar(
-            title: Text('Image Upload'),
+            title: Text('GraphQL Image Upload'),
           ),
           body: ImageUpload(),
         ),
@@ -88,7 +88,7 @@ class ImageUploadState extends State<ImageUpload> {
                     SizedBox(
                       width: 5,
                     ),
-                    Text('Select File')
+                    Text('Select Image')
                   ],
                 ),
                 onPressed: () => selectImage(),
@@ -102,7 +102,7 @@ class ImageUploadState extends State<ImageUpload> {
                     return FlatButton(
                       child: _isLoadingInProgress(),
                       onPressed: () {
-                        
+
                         setState(() {
                           _uploadInProgress = true;
                         });
@@ -123,8 +123,9 @@ class ImageUploadState extends State<ImageUpload> {
                       },
                     );
                   },
-                  onCompleted: (d) {
-                    print(d);
+                  onCompleted: (result) {
+                    print(result);
+
                     setState(() {
                       _uploadInProgress = false;
                     });
@@ -133,12 +134,16 @@ class ImageUploadState extends State<ImageUpload> {
                     var message = results.hasErrors
                         ? '${results.errors.join(",")}'
                         : "Image Uploaded Successfully";
-
+                    
                     final snackBar = SnackBar(
                       content: Text(message),
                       backgroundColor: Colors.blue,
                     );
                     Scaffold.of(context).showSnackBar(snackBar);
+                    
+                    _image = results.hasErrors
+                        ? _image
+                        : null;
                   },
                 ),
             ],

@@ -10,13 +10,14 @@ class GraphQLIndex extends StatelessWidget {
     return Material(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('GraphQl Index'),
+          title: Text('GraphQL Index'),
         ),
         body:Center(
           child: Column(
             children: <Widget>[
                buildListTile(context, 'GraphQL First Sample', '/gqlApp'),
-               buildListTile(context, 'GraphQL File Upload', '/gqlUpload')
+               buildListTile(context, 'GraphQL Image Upload', '/gqlUpload'),
+               buildListTile(context, 'GraphQL File Upload', '/gqlFile')
             ],
           )
         ) ,

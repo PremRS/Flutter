@@ -55,7 +55,12 @@ class FirstGqlState extends State<FirstGql> {
       """ ),
       builder: (QueryResult result, { VoidCallback refetch, FetchMore fetchMore }) {
         if(result.data == null){
-          return ListTile(title:Text('No Data Found'));
+          return Align(
+            alignment: Alignment.center,
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.blue,
+            ),
+          );
         }
     return ListView.builder(
       itemCount: result.data['countries'].length,
