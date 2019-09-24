@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 
 
@@ -13,17 +14,40 @@ const kHtml = """<h1>Heading 1</h1>
 <p>And of course, cat image:</p>
 <figure>
   <img src="https://media.giphy.com/media/6VoDJzfRjJNbG/giphy-downsized.gif" width="250" height="171" />
-  <figcaption>Source: <a href="https://gph.is/QFgPA0">https://gph.is/QFgPA0</a></figcaption>
+  <figcaption>Source: <a href="https://flutter.dev">Flutter</a></figcaption>
 </figure>
 """;
 
 
-class HelloWorldCoreScreen extends StatelessWidget {
+class WebViewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text('HelloWorldCoreScreen'),
         ),
+        body: HtmlWidget(
+          kHtml,
+          onTapUrl: (url) => showDialog(
+                context: context,
+                builder: (_) => AlertDialog(
+                      title: Text('Sample'),
+                      content: ButtonBar(
+                        children: <Widget>[
+                          RaisedButton(
+                        onPressed: () => Navigator.pushNamed(context,'/') ,
+                        child: Text('HOME'),
+                      ),
+                      RaisedButton(
+                        onPressed: () => Navigator.pushNamed(context,'/webView') ,
+                        child: Text('POP'),
+                      ),
+                        ],
+                      )
+                      
+                    ),
+              ),
+        ),
+
         
         
       );

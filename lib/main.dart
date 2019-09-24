@@ -6,6 +6,7 @@ import 'package:my_app/GraphQLFile.dart';
 import 'package:my_app/GraphQLIndex.dart';
 import 'package:my_app/GraphQLUpload.dart';
 import 'package:my_app/SplashScreen.dart';
+import 'package:my_app/WebView.dart';
 import './layout_structure.dart';
 
 import './counter.dart';
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
         '/gql': (context) => GraphQLIndex(),
         '/gqlApp': (context) => GraphQLApp(),
         '/gqlUpload': (context) => GraphQLUpload(),
-        '/gqlFile': (context) => GraphQLFile()
+        '/gqlFile': (context) => GraphQLFile(),
+        '/webView': (context) => WebViewPage()
       },
     );
   }
@@ -135,6 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
             _buildGridTiles('assets/screen.png', 'SCREEN-2', '/screen2'),
             _buildGridTiles('assets/login.png', 'LOGIN SCREEN', '/screen'),
             _buildGridTiles('assets/graphql.png', 'GRAPHQL', '/gql'),
+            _buildGridTiles('assets/webview.png', 'WEBVIEW', '/webView'),
 
           ]);
 
